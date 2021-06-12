@@ -10,6 +10,11 @@ import { ArticleComponent } from './pages/article/article.component';
 import { CategoryArticlesComponent } from './pages/category-articles/category-articles.component';
 import { SearchComponent } from './pages/search/search.component';
 import { ArchiveComponent } from './pages/archive/archive.component';
+import { AdminHomeComponent } from './admin-pages/admin-home/admin-home.component';
+import { ArticleListComponent } from './admin-pages/article/article-list/article-list.component';
+import { ArticleUpdateComponent } from './admin-pages/article/article-update/article-update.component';
+import { ArticleAddComponent } from './admin-pages/article/article-add/article-add.component';
+import {AdminArticleComponent} from './admin-pages/article/article/article.component';
 
 const routes: Routes = [
   {
@@ -68,7 +73,38 @@ const routes: Routes = [
   {
     //www.zavazingo.com/admin
     path:"admin",
-    component:AdminLayoutComponent
+    component:AdminLayoutComponent,
+    children:[
+      {
+        path:"",
+        component:AdminHomeComponent
+      },
+      {
+        path:"anasayfa",
+        component:AdminHomeComponent
+      },
+      {
+        path:"makale",
+        component:AdminArticleComponent,
+        children:[
+
+          {
+            path:"liste",
+            component:ArticleListComponent
+          },
+          {
+            path:"guncelle/:id",
+            component:ArticleUpdateComponent
+          },
+          {
+            path:"ekle",
+            component:ArticleAddComponent
+          },
+
+        ]
+      },
+
+    ]
   }
 ];
 

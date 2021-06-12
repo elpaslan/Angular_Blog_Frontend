@@ -13,6 +13,10 @@ export class ArticleService {
   public loading: boolean = true;
   private apiUrl: string = 'https://localhost:44366/api/articles';
 
+  getArticlesWithoutPg() {
+    return this.httpClient.get<Article[]>(this.apiUrl);
+  }
+
   getArticles(page: number, pageSize: number) {
     let api = `${this.apiUrl}/${page}/${pageSize}`;
 
@@ -79,4 +83,29 @@ export class ArticleService {
     let api = `${this.apiUrl}/ArticleViewCountUp/${id}`;
     return this.httpClient.get(api);
   }
+
+  saveArticlePicture(image: FormData) {
+    return this.httpClient.post<any>(
+      `${this.apiUrl}/SaveArticlePicture`,
+      image
+    );
+  }
+
+  addArticle(article:Article){
+   return this.httpClient.post(this.apiUrl,article);
+
+  }
+
+  updateArticle(id:number,article:Article){
+
+    return this.httpClient.put(`${this.apiUrl}/${id}`,article);
+
+  }
+
+  deleteArticle(id:number){
+    return this.httpClient.delete(`${this.apiUrl}/${id}`);
+  }
+
+
+
 }
