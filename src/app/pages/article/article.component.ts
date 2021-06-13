@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ListCommentsComponent } from 'src/app/components/list-comments/list-comments.component';
 import { Article } from 'src/app/models/article';
 import { BlogCategory } from 'src/app/models/blogCategory';
 import { ArticleService } from 'src/app/services/article.service';
@@ -12,6 +13,9 @@ import { ArticleService } from 'src/app/services/article.service';
 export class ArticleComponent implements OnInit {
   article: Article;
   category: BlogCategory;
+
+  @ViewChild(ListCommentsComponent, { static: false })
+  listComponent: ListCommentsComponent;
 
   constructor(
     public articleService: ArticleService,
@@ -30,5 +34,8 @@ export class ArticleComponent implements OnInit {
         this.articleService.articleViewCountUp(this.article.id).subscribe();
       });
     });
+  }
+  ReloadCommnetList() {
+    this.listComponent.reLoad();
   }
 }

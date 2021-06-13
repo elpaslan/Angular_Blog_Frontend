@@ -15,6 +15,8 @@ import { ArticleListComponent } from './admin-pages/article/article-list/article
 import { ArticleUpdateComponent } from './admin-pages/article/article-update/article-update.component';
 import { ArticleAddComponent } from './admin-pages/article/article-add/article-add.component';
 import {AdminArticleComponent} from './admin-pages/article/article/article.component';
+import { AdminLoginComponent } from './pages/admin-login/admin-login.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -65,6 +67,10 @@ const routes: Routes = [
         path:"iletisim",
         component:ContactComponent
       },
+      {
+        path:"adminlogin",
+        component:AdminLoginComponent
+      },
     //   { path: "**"
     //   , component: PageNotFoundComponent
     // }
@@ -74,6 +80,7 @@ const routes: Routes = [
     //www.zavazingo.com/admin
     path:"admin",
     component:AdminLayoutComponent,
+    canActivate:[AuthGuardService],
     children:[
       {
         path:"",
